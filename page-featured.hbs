@@ -1,0 +1,41 @@
+{{!< default}}
+
+asdf
+{{id}} + {{slug}}
+
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            {{#get "tags" limit="3" include='count.posts' order='count.posts desc'}}
+                {{#foreach tags}}
+                <article class="read-next-card"
+                    {{#if ../primary_tag.feature_image}}
+                        style="background-image: url({{../primary_tag.feature_image}})"
+                    {{else}}
+                        {{#if @blog.cover_image}}
+                            style="background-image: url({{@blog.cover_image}})"{{/if}}
+                    {{/if}}
+                >
+                    <header class="read-next-card-header">
+                        <h3 class="read-next-card-header-title"><a href="{{url}}">{{name}} {{id}} {{slug}}</a></h3>
+                    </header>
+                    <div class="read-next-divider">{{> "icons/infinity"}}</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                        {{#get "posts" filter="primary_tag:['{{name}}']" limit="5" as |featured|}}
+                            {{#foreach featured}}
+                            <li><a href="{{url}}">{{title}} {{id}} {{slug}} {{primary_tag.slug}}</a></li>
+                            {{/foreach}}
+                        {{/get}}
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="{{url}}">{{plural meta.pagination.total empty='No posts' singular='% post' plural='See all % posts'}} →</a>
+                    </footer>
+                </article>
+                {{/foreach}}
+            {{/get}}
+        </div>
+    </div>
+</aside>

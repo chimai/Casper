@@ -1,5 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{@site.lang}}">
+
+{{#is "home"}}
+{{#has slug="en"}}
+<html lang="en">
+{{else}}<html lang="ru">
+{{/has}}
+{{else}}
+{{#post}}{{#has tag="en"}}<html lang="en">{{else}}<html lang="ru">
+{{/has}}{{/post}}
+{{/is}}
+
 <head>
 
     {{!-- Document Settings --}}
